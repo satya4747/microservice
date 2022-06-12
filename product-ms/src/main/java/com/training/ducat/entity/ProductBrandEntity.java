@@ -1,23 +1,18 @@
 package com.training.ducat.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Repository;
 
 import lombok.Data;
 
 @Repository
-@Entity(name = "Product")
+@Entity
 @Data
-public class ProductEntity{
+public class ProductBrandEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,9 +20,5 @@ public class ProductEntity{
 	
 	private String name;
 	
-	@Column(name = "description")
-	private String desc;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<ProductBrandEntity> brand;
+	private long price;
 }

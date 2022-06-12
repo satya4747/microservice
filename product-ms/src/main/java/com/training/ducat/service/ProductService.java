@@ -11,9 +11,6 @@ import com.training.ducat.entity.ProductEntity;
 import com.training.ducat.model.ProductDTO;
 import com.training.ducat.repo.ProductRepo;
 
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 @Service
 public class ProductService{
 
@@ -32,6 +29,11 @@ public class ProductService{
 			return productDTO;
 		 }
 		 return null;
+	}
+	
+	public ProductEntity save(ProductEntity entity) {
+		productRepo.save(entity);
+		return entity;
 	}
 	
 }

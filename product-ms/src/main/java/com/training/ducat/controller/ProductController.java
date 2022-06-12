@@ -2,12 +2,13 @@ package com.training.ducat.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ProductController {
 	
-	
+	@Value("${msg}")
+	String msg;
 	private ProductService productService;
 	
 	public ProductController(ProductService productService) {
@@ -31,6 +33,7 @@ public class ProductController {
 	
 	@GetMapping("/list")
 	public ResponseEntity<List<ProductEntity>> getList(){
+		log.info("config message:==========={}======",msg);
 		log.trace("A TRACE Message");
 		log.debug("A DEBUG Message");
 		log.info("An INFO Message");
@@ -42,6 +45,11 @@ public class ProductController {
 	@GetMapping("/{id}")
 	public ProductDTO getId(@PathVariable("id") long id){
 		return productService.getById(id);
-
+	}
+	
+	@PostMapping("/save")
+	public ProductEntity save(@RequestBody ProductEntity entity){
+		productService.save(entity);
+		return entity;
 	}
 }
