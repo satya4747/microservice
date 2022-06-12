@@ -2,7 +2,8 @@ package com.training.ducat.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +15,13 @@ import com.training.ducat.entity.ProductEntity;
 import com.training.ducat.model.ProductDTO;
 import com.training.ducat.service.ProductService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/v1/product")
+@Slf4j
 public class ProductController {
+	
 	
 	private ProductService productService;
 	
@@ -26,15 +31,17 @@ public class ProductController {
 	
 	@GetMapping("/list")
 	public ResponseEntity<List<ProductEntity>> getList(){
+		log.trace("A TRACE Message");
+		log.debug("A DEBUG Message");
+		log.info("An INFO Message");
+		log.warn("A WARN Message");
+		log.error("An ERROR Message");
 		return ResponseEntity.status(HttpStatus.FOUND).body(productService.getList());
 	}
 	
 	@GetMapping("/{id}")
 	public ProductDTO getId(@PathVariable("id") long id){
-		ProductDTO dto = new ProductDTO();
-		dto.setId(11);
-		dto.setName("asdf");
-		return dto;// productService.getById(id);
+		return productService.getById(id);
 
 	}
 }

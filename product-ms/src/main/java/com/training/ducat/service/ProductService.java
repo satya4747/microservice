@@ -12,10 +12,10 @@ import com.training.ducat.model.ProductDTO;
 import com.training.ducat.repo.ProductRepo;
 
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@NoArgsConstructor
 @Service
-public class ProductService extends BaseService{
+public class ProductService{
 
 	@Autowired
 	private ProductRepo productRepo;
@@ -23,7 +23,6 @@ public class ProductService extends BaseService{
 	public List<ProductEntity> getList() {
 		return productRepo.findAll();
 	}
-	
 	
 	public ProductDTO getById(long id) {
 		 Optional<ProductEntity> findById = productRepo.findById(id);
@@ -34,7 +33,5 @@ public class ProductService extends BaseService{
 		 }
 		 return null;
 	}
-	
-	
 	
 }
