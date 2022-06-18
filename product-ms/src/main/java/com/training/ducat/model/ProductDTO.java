@@ -13,6 +13,8 @@ public class ProductDTO {
 	private long id;
 	private String name;
 	private String desc;
+	private long price;
+	private long discount;
 	private List<ProductBrandEntity> brand;
 
 }
