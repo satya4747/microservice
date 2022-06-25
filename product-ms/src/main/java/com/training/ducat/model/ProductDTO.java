@@ -16,5 +16,6 @@ public class ProductDTO {
 	private long price;
 	private long discount;
 	private List<ProductBrandEntity> brand;
+	private String port;
 
 }

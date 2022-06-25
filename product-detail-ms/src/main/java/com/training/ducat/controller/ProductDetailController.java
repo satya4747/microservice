@@ -2,6 +2,8 @@ package com.training.ducat.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,9 @@ public class ProductDetailController {
 	
 	private ProductDetailService productService;
 	
+	@Autowired
+	Environment environment;
+	
 	public ProductDetailController(ProductDetailService productService) {
 		this.productService = productService;
 	}
@@ -36,7 +41,10 @@ public class ProductDetailController {
 	
 	@GetMapping("/{id}")
 	public ProductDetailDTO getId(@PathVariable("id") long id){
-		return productService.getById(id);
+		ProductDetailDTO byId = productService.getById(id);
+		log.info("Environment port {}",environment.getProperty("local.server.port"));
+		byId.setPort(environment.getProperty("local.server.port"));		
+		return byId;
 	}
 	
 	@PostMapping("/save")

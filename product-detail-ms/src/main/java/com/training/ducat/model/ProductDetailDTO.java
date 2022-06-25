@@ -9,4 +9,5 @@ public class ProductDetailDTO {
 	private long id;
 	private long price;
 	private long discount;
+	private String port;
 }

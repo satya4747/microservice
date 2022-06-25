@@ -44,7 +44,8 @@ public class ProductController {
 	
 	@GetMapping("/{id}")
 	public ProductDTO getId(@PathVariable("id") long id){
-		return productService.getById(id);
+		ProductDTO byId = productService.getById(id);
+		return byId;
 	}
 	
 	@GetMapping("/feign/{id}")

@@ -13,7 +13,10 @@ import com.training.ducat.entity.ProductEntity;
 import com.training.ducat.model.ProductDTO;
 import com.training.ducat.repo.ProductRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ProductService{
 
 	@Autowired
@@ -25,7 +28,7 @@ public class ProductService{
 	@Autowired
 	RestTemplate restTemplate;
 	
-	@Value("${product-detail-byId-URL:http://localhost:9091/v1/product-detail/}")
+	@Value("${product-detail-byId-URL1:http://product-detail-ms/v1/product-detail/}")
 	String productDetailbyIdURL;
 	
 	public List<ProductEntity> getList() {
@@ -41,6 +44,7 @@ public class ProductService{
 			ProductDTO proDetail = restTemplate.getForObject(productDetailbyIdURL+id, productDTO.getClass());
 			productDTO.setDiscount(proDetail.getDiscount());
 			productDTO.setPrice(proDetail.getPrice());
+			productDTO.setPort(proDetail.getPort());
 			return productDTO;
 		 }
 		 return null;
@@ -48,6 +52,7 @@ public class ProductService{
 	
 	
 	public ProductDTO getFeignById(long id) {
+		log.info("feign request {}",id);
 		 Optional<ProductEntity> findById = productRepo.findById(id);
 		 if(findById.isPresent()) {
 			ProductDTO productDTO = new ProductDTO();
@@ -56,6 +61,7 @@ public class ProductService{
 			ProductDTO proDetail = detailTemplate.getDetail(id);
 			productDTO.setDiscount(proDetail.getDiscount());
 			productDTO.setPrice(proDetail.getPrice());
+			productDTO.setPort(proDetail.getPort());
 			return productDTO;
 		 }
 		 return null;

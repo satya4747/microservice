@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.training.ducat.model.ProductDTO;
 
-@FeignClient(value = "feignClient", url = "http://localhost:9091")
+@FeignClient(value = "PRODUCT-DETAIL-MS")
 public interface ProductDetailTemplate {
 
 	@GetMapping("v1/product-detail/{id}")
