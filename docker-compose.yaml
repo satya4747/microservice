@@ -1,0 +1,17 @@
+version: '3.7'
+
+
+services:
+  naming-server:
+  #image: proashwani/eureka-server
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    mem_limit: 700m
+    ports:
+    - "8761:8761"
+    networks:
+      - product-network
+
+networks:
+  product-network:
